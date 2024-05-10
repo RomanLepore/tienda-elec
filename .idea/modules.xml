@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/ProyectoFinal.iml" filepath="$PROJECT_DIR$/.idea/ProyectoFinal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/carrito-services/carrito-services.iml" filepath="$PROJECT_DIR$/carrito-services/carrito-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/config-sv/config-sv.iml" filepath="$PROJECT_DIR$/config-sv/config-sv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-sv/eureka-sv.iml" filepath="$PROJECT_DIR$/eureka-sv/eureka-sv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/producto-services/producto-services.iml" filepath="$PROJECT_DIR$/producto-services/producto-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ventas-services/ventas-services.iml" filepath="$PROJECT_DIR$/ventas-services/ventas-services.iml" />
+    </modules>
+  </component>
+</project>
