@@ -14,6 +14,7 @@ public class ProductoService implements IProductoService{
 
      private List<Producto> listaProductos = new ArrayList<Producto>();
 
+     // al iniciar carga lista de productos emulando bd
      @PostConstruct
      public void init(){
          this.loadProductos();
