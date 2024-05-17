@@ -30,7 +30,24 @@ public class CarritoService implements ICarritoService{
 
     @Override
     public void createCarrito(Carrito carrito) {
-        carritoRepo.save(carrito);
+        Carrito carritoVacio = new Carrito();
+        List<Long> listaId = carrito.getListaIdProd();
+        List<ProductoDTO> listaProductos = prodAPI.getListaProductos();
+        double precio = 0;
+
+        for (Long idProd : listaId) {
+            for (ProductoDTO producto : listaProductos) {
+                if (producto.getId_prod().equals(idProd)) {
+                    precio += producto.getPrecio();
+                }
+            }
+        }
+
+
+        carritoVacio.setTotal(precio);
+        carritoVacio.setListaIdProd(carrito.getListaIdProd());
+        carritoRepo.save(carritoVacio);
+
     }
 
     @Override
