@@ -40,33 +40,30 @@ public class CarritoService implements ICarritoService{
 
     @Override
     public void addProduct(Long id_carrito,Long id_prod) {
-        // encuentra el carrito por su id
+
+        // busca el carrito por su id
         Carrito carrito = this.findById(id_carrito);
-        ProductoDTO producto = this.getProducto(id_prod);
-        boolean existe = false;
-        Double totalCarrito = carrito.getTotal();
-
-        if(carrito!=null){
-
-            List<Long> idsProductos = carrito.getListaIdProd();
-
-            for (Long listaProd:idsProductos) {
-
-                if(listaProd.equals(id_prod)){
-                    existe = true;
-                }
-            }
-
-            if(!existe){
-
-                Double precio = producto.getPrecio();
-                totalCarrito += precio;
-                carrito.setTotal(totalCarrito);
-                idsProductos.add(id_prod);
-                //hacer metodo edit
-                this.editCarrito(id_carrito,carrito);
-            }
+        if(carrito==null){
+            throw new RuntimeException("No existe carrito con el id: " + id_carrito);
         }
+
+        // busca el producto por su id
+        ProductoDTO producto = this.getProducto(id_prod);
+
+
+        List<Long> idsProductos = carrito.getListaIdProd();
+        if (idsProductos.contains(id_prod)) {
+            return;
+        }
+
+        Double precio = producto.getPrecio();
+        carrito.setTotal(carrito.getTotal() + precio);
+
+
+        idsProductos.add(id_prod);
+
+        // Actualiza el carrito en el repositorio
+        this.editCarrito(id_carrito, carrito);
 
     }
 

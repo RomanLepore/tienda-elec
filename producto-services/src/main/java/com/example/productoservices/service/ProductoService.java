@@ -28,12 +28,13 @@ public class ProductoService implements IProductoService{
 
     @Override
     public Producto getProducto(Long id_prod) {
+
         for (Producto lista:listaProductos) {
-            if (lista.getId_prod() == id_prod){
+            if (lista.getId_prod().equals(id_prod)){
                return lista;
             }
         }
-        return null;
+         throw new RuntimeException("No existe producto con ese id");
     }
 
     private void loadProductos(){
