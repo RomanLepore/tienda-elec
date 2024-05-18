@@ -30,6 +30,7 @@ public class CarritoService implements ICarritoService{
 
     @Override
     public void createCarrito(Carrito carrito) {
+
         Carrito carritoVacio = new Carrito();
         List<Long> listaId = carrito.getListaIdProd();
         List<ProductoDTO> listaProductos = prodAPI.getListaProductos();
@@ -69,9 +70,6 @@ public class CarritoService implements ICarritoService{
 
 
         List<Long> idsProductos = carrito.getListaIdProd();
-        if (idsProductos.contains(id_prod)) {
-            return;
-        }
 
         Double precio = producto.getPrecio();
         carrito.setTotal(carrito.getTotal() + precio);
@@ -85,7 +83,13 @@ public class CarritoService implements ICarritoService{
     }
 
     @Override
-    public void deleteProduct(Long id_prod) {
+    public void deleteProduct(Long id_carrito,Long id_prod) {
+        Carrito carrito = this.findById(id_carrito);
+
+        List<Long> idsProducto = carrito.getListaIdProd();
+
+
+
     }
 
     private ProductoDTO getProducto(Long id_prod) {
