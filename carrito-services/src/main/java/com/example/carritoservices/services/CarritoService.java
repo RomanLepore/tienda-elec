@@ -4,7 +4,7 @@ import com.example.carritoservices.dto.ProductoDTO;
 import com.example.carritoservices.model.Carrito;
 import com.example.carritoservices.repository.ICarritoRepository;
 import com.example.carritoservices.repository.IProdAPI;
-import com.example.productoservices.excepciones.CarritoNotFoundException;
+import com.example.carritoservices.excepciones.CarritoNotFoundException;
 import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
