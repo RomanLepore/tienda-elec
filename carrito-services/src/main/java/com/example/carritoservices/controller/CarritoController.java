@@ -34,4 +34,9 @@ public class CarritoController {
         carritoServ.addProduct(id_carrito,id_prod);
     }
 
+    @DeleteMapping("/deleteProd/{id_carrito}/{id_prod}")
+    public void deleteProduct(@PathVariable Long id_carrito, @PathVariable Long id_prod){
+        carritoServ.deleteProduct(id_carrito,id_prod);
+    }
+
 }

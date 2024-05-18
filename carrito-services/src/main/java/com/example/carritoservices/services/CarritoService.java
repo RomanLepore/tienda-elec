@@ -85,9 +85,18 @@ public class CarritoService implements ICarritoService{
     public void deleteProduct(Long id_carrito,Long id_prod) {
         Carrito carrito = this.findById(id_carrito);
 
-        List<Long> idsProducto = carrito.getListaIdProd();
+        ProductoDTO producto = this.getProducto(id_prod);
+
+        List<Long> listaIds = carrito.getListaIdProd();
+
+        Double precio = producto.getPrecio();
+        carrito.setTotal(carrito.getTotal() - precio);
 
 
+        listaIds.remove(id_prod);
+
+        // Actualiza el carrito en el repositorio
+        this.editCarrito(id_carrito, carrito);
 
     }
 
