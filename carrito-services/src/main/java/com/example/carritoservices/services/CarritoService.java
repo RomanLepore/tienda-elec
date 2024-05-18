@@ -4,6 +4,7 @@ import com.example.carritoservices.dto.ProductoDTO;
 import com.example.carritoservices.model.Carrito;
 import com.example.carritoservices.repository.ICarritoRepository;
 import com.example.carritoservices.repository.IProdAPI;
+import com.example.productoservices.excepciones.CarritoNotFoundException;
 import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class CarritoService implements ICarritoService{
 
     @Override
     public Carrito findById(Long id_carrito) {
-        return carritoRepo.findById(id_carrito).orElse(null);
+        return carritoRepo.findById(id_carrito).orElseThrow(()-> new CarritoNotFoundException("No existe dicho carrito"));
     }
 
     @Override
@@ -61,9 +62,7 @@ public class CarritoService implements ICarritoService{
 
         // busca el carrito por su id
         Carrito carrito = this.findById(id_carrito);
-        if(carrito==null){
-            throw new RuntimeException("No existe carrito con el id: " + id_carrito);
-        }
+
 
         // busca el producto por su id
         ProductoDTO producto = this.getProducto(id_prod);
