@@ -16,14 +16,16 @@ public class VentaService implements IVentaService{
     private ICarritoAPI carritoAPI;
     @Override
     public void createVenta(Venta venta) {
-        //agregar excepcion null
         vtaRepo.save(venta);
     }
 
     @Override
     public CarritoDTO getDatos(Long id_venta) {
+
         Venta venta = this.getVenta(id_venta);
+
         CarritoDTO carrito = carritoAPI.getCarrito(venta.getId_carrito());
+
         CarritoDTO carritoVacio = new CarritoDTO();
 
         carritoVacio.setId_carrito(carrito.getId_carrito());
@@ -33,8 +35,7 @@ public class VentaService implements IVentaService{
         return carritoVacio;
     }
 
-    @Override
-    public Venta getVenta(Long id_venta) {
+    private Venta getVenta(Long id_venta) {
         return vtaRepo.findById(id_venta).orElseThrow(()-> new VentaNotFoundException("No existe dicha venta"));
     }
 }
