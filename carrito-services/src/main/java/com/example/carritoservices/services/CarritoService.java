@@ -114,4 +114,28 @@ public class CarritoService implements ICarritoService{
            carritoRepo.save(nuevoCarrito);
     }
 
+    private List<Long> getProductos(Long id_carrito){
+        Carrito carrito = this.findById(id_carrito);
+        List<Long> listaId = carrito.getListaIdProd();
+
+        return listaId;
+    }
+
+    @Override
+    public List<String> getNombreProd(Long id_carrito) {
+        List<Long> listaId = this.getProductos(id_carrito);
+        List<ProductoDTO> listaProductos = prodAPI.getListaProductos();
+        List<String> listaNombres = new ArrayList<>();
+
+        for (Long idProd : listaId) {
+            for (ProductoDTO producto : listaProductos) {
+                if (producto.getId_prod().equals(idProd)) {
+                    listaNombres.add(producto.getNombre());
+                }
+            }
+        }
+
+        return listaNombres;
+    }
+
 }

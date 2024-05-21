@@ -39,4 +39,8 @@ public class CarritoController {
         carritoServ.deleteProduct(id_carrito,id_prod);
     }
 
+    @GetMapping("/listaProd/{id_carrito}")
+    public List<String> getNombreProd(@PathVariable Long id_carrito){
+        return carritoServ.getNombreProd(id_carrito);
+    }
 }

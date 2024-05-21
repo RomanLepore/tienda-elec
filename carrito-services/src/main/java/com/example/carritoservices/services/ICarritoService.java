@@ -12,6 +12,7 @@ public interface ICarritoService {
     public void deleteCarrito(Long id_carrito);
     public void addProduct(Long id_carrito,Long id_prod);
     public void deleteProduct(Long id_carrito,Long id_prod);
+    public List<String> getNombreProd(Long id_carrito);
 
 
 }
