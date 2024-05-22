@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ICarritoService {
     public List<Carrito> getCarritos();
-    public Carrito findById(Long id_carrito);
+    public Carrito getCarrito(Long id_carrito);
     public void createCarrito(Carrito carrito);
     public void deleteCarrito(Long id_carrito);
     public void addProduct(Long id_carrito,Long id_prod);

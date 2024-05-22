@@ -6,6 +6,8 @@ import com.example.carritoservices.repository.ICarritoRepository;
 import com.example.carritoservices.repository.IProdAPI;
 import com.example.carritoservices.excepciones.CarritoNotFoundException;
 import com.netflix.discovery.converters.Auto;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public class CarritoService implements ICarritoService{
     }
 
     @Override
-    public Carrito findById(Long id_carrito) {
+    public Carrito getCarrito(Long id_carrito) {
         return carritoRepo.findById(id_carrito).orElseThrow(()-> new CarritoNotFoundException("No existe dicho carrito"));
     }
 
@@ -58,10 +60,12 @@ public class CarritoService implements ICarritoService{
     }
 
     @Override
+    @CircuitBreaker(name = "producto-services", fallbackMethod = "fallbackAddProduct")
+    @Retry(name="producto-services")
     public void addProduct(Long id_carrito,Long id_prod) {
 
         // busca el carrito por su id
-        Carrito carrito = this.findById(id_carrito);
+        Carrito carrito = this.getCarrito(id_carrito);
 
 
         // busca el producto por su id
@@ -83,7 +87,7 @@ public class CarritoService implements ICarritoService{
 
     @Override
     public void deleteProduct(Long id_carrito,Long id_prod) {
-        Carrito carrito = this.findById(id_carrito);
+        Carrito carrito = this.getCarrito(id_carrito);
 
         ProductoDTO producto = this.getProducto(id_prod);
 
@@ -106,7 +110,7 @@ public class CarritoService implements ICarritoService{
     }
 
     private void editCarrito(Long id_aeditar, Carrito nuevoCarrito) {
-            Carrito carritoAEditar = this.findById(id_aeditar);
+            Carrito carritoAEditar = this.getCarrito(id_aeditar);
 
            carritoAEditar.setListaIdProd(nuevoCarrito.getListaIdProd());
            carritoAEditar.setTotal(nuevoCarrito.getTotal());
@@ -115,13 +119,13 @@ public class CarritoService implements ICarritoService{
     }
 
     private List<Long> getProductos(Long id_carrito){
-        Carrito carrito = this.findById(id_carrito);
+        Carrito carrito = this.getCarrito(id_carrito);
         List<Long> listaId = carrito.getListaIdProd();
 
         return listaId;
     }
 
-    @Override
+
     public List<String> getNombreProd(Long id_carrito) {
         List<Long> listaId = this.getProductos(id_carrito);
         List<ProductoDTO> listaProductos = prodAPI.getListaProductos();
@@ -136,6 +140,10 @@ public class CarritoService implements ICarritoService{
         }
 
         return listaNombres;
+    }
+
+    public ProductoDTO fallbackAddProduct(Throwable throwable){
+            return new ProductoDTO(999999L, "ERROR", null);
     }
 
 }

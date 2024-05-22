@@ -5,6 +5,8 @@ import com.example.ventasservices.excepciones.VentaNotFoundException;
 import com.example.ventasservices.model.Venta;
 import com.example.ventasservices.repository.ICarritoAPI;
 import com.example.ventasservices.repository.IVentaRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,8 @@ public class VentaService implements IVentaService{
     }
 
     @Override
+    @CircuitBreaker(name = "carrito-services", fallbackMethod = "fallbackGetDatos")
+    @Retry(name="carrito-services")
     public CarritoDTO getDatos(Long id_venta) {
 
         Venta venta = this.getVenta(id_venta);
@@ -38,4 +42,9 @@ public class VentaService implements IVentaService{
     private Venta getVenta(Long id_venta) {
         return vtaRepo.findById(id_venta).orElseThrow(()-> new VentaNotFoundException("No existe dicha venta"));
     }
+
+    public CarritoDTO fallbackGetDatos(Throwable throwable){
+        return new CarritoDTO(null, null, null);
+    }
+
 }

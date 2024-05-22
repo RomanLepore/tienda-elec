@@ -26,7 +26,7 @@ public class CarritoController {
 
     @GetMapping("/get/{id_carrito}")
     public Carrito getCarrito(@PathVariable Long id_carrito){
-        return carritoServ.findById(id_carrito);
+        return carritoServ.getCarrito(id_carrito);
     }
 
     @PostMapping("/addProd/{id_carrito}/{id_prod}")
