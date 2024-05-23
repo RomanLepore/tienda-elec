@@ -5,6 +5,7 @@ import com.example.carritoservices.services.CarritoService;
 import com.netflix.discovery.converters.Auto;
 import jakarta.ws.rs.Path;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,9 @@ import java.util.List;
 public class CarritoController {
     @Autowired
     private CarritoService carritoServ;
+
+    @Value("${server.port}")
+    private int serverPort;
 
     @GetMapping("/getTodos")
     public List<Carrito> getCarritos(){

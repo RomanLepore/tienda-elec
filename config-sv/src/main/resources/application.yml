@@ -1,0 +1,27 @@
+server:
+  port: 8585
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      enabled: true
+      server:
+        git:
+          uri: https://github.com/RomanLepore/config-tiendaelec.git
+          search-paths: config-data
+          username: ${GIT_USER}
+          password: ${GIT_TOKEN}
+
+
+
+
+
+
+
+
+
+
+
+
