@@ -15,14 +15,6 @@
         <module name="carrito-services" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="api-gateway" target="17" />
-      <module name="carrito-services" target="17" />
-      <module name="config-sv" target="17" />
-      <module name="eureka-sv" target="17" />
-      <module name="producto-services" target="17" />
-      <module name="ventas-services" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "1bee8809-8efc-4f30-8b43-22e8be2725ad",
+		"name": "tienda-elec",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11935901"
+	},
+	"item": [
+		{
+			"name": "Prueba config server",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Traer todos los productos",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Crear carrito con productos",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Crear venta asociada a carrito",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
