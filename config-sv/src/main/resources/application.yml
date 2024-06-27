@@ -14,8 +14,7 @@ spring:
       enabled: true
       server:
         git:
-          uri: https://github.com/RomanLepore/config-tiendaelec.git
-          search-paths: config-data
+          uri: https://github.com/RomanLepore/configTiendaElec/tree/main
           username: ${GIT_USER}
           password: ${GIT_TOKEN}
 
