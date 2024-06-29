@@ -1,4 +1,16 @@
 FROM openjdk:17-jdk-slim
-ARG JAR_FILE=target/eureka-sv-0.0.1.jar
-COPY ${JAR_FILE} app_eureka.jar
-ENTRYPOINT ["java","-jar","app_eureka.jar"]
+
+WORKDIR /root
+
+COPY ./pom.xml /root
+COPY ../.mvn /root/.mvn
+COPY ./mvnw /root
+
+RUN ./mvnw dependency:go-offline
+
+COPY ./src /root/src
+
+RUN ./mvnw clean install -DskipTests
+
+
+ENTRYPOINT ["java","-jar","/root/target/eureka-sv-0.0.1.jar"]
