@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  eureka-sv:
+    image: eureka-sv-image
+    container_name: eureka-sv-container
+    ports:
+      - "8761:8761"
+    networks:
+      - spring-network
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql
+    container_name: servicio_carrito
+    environment:
+      MYSQL_ROOT_PASSWORD: N1rivnUTMXzt0TJ
+      MYSQL_DATABASE: servicio_carrito
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: N1rivnUTMXzt0TJ
+    ports:
+      - "3307:3306"
+    networks:
+      - spring-network
+    volumes:
+      - mysql-volume
+
+networks:
+  spring-network:
+volumes:
+  mysql-volume:
