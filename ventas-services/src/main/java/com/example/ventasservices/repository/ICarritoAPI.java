@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "carrito-services", url = "http://localhost:8082/carrito")
+@FeignClient(name = "carrito-services", url = "http://carrito-container:8082/carrito")
 public interface ICarritoAPI {
 
     @GetMapping("/get/{id_carrito}")

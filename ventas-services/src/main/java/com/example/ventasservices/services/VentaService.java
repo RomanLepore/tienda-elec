@@ -14,8 +14,10 @@ import org.springframework.stereotype.Service;
 public class VentaService implements IVentaService{
     @Autowired
     private IVentaRepository vtaRepo;
+
     @Autowired
     private ICarritoAPI carritoAPI;
+
     @Override
     public void createVenta(Venta venta) {
         vtaRepo.save(venta);

@@ -85,7 +85,7 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: N1rivnUTMXzt0TJ
     ports:
-      - "3308:3309"
+      - "3308:3306"
     networks:
       - spring-network
     volumes:
